@@ -8,6 +8,9 @@ app.use(morgan('Accessing :url with :method method. Sent status :status in :resp
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
+app.set('views','./views');
+app.set('view engine', 'pug');
+
 
 const productRoutes = require('./routes/productRoutes'),
     cartRoutes = require('./routes/cartRoutes'),

@@ -1,8 +1,8 @@
 {
   "name": "express-app",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "This is an Express App made for fun by Abhishek",
+  "main": "server.js",
   "scripts": {
     "dev": "nodemon server.js",
     "debug": "PORT=2000 node server.js",
@@ -10,12 +10,13 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "Abhishek Saini",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "pug": "^3.0.2"
   },
   "devDependencies": {
     "nodemon": "^2.0.7"
