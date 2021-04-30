@@ -1,7 +1,7 @@
 const router = require('express').Router();
 
 router.get('/', (req, res, next) => {
-    res.send('This Home')
+    res.render('home',{ title: 'Express-Playground', message: 'Bulma'})
 });
 
 router.post('/', (req, res, next) => {

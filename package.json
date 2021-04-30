@@ -7,6 +7,8 @@
     "dev": "nodemon server.js",
     "debug": "PORT=2000 node server.js",
     "start": "node server.js",
+    "sass-watch": "sass --watch public/scss:public/css",
+    "sass": "sass",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -19,6 +21,7 @@
     "pug": "^3.0.2"
   },
   "devDependencies": {
+    "bulma": "^0.9.2",
     "nodemon": "^2.0.7"
   }
 }

@@ -10,6 +10,7 @@ app.use(bodyParser.json());
 
 app.set('views','./views');
 app.set('view engine', 'pug');
+app.use('/static', express.static('public'))
 
 
 const productRoutes = require('./routes/productRoutes'),

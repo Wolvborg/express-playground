@@ -1,0 +1,22 @@
+extends main-layout
+block content
+    h1.title= message
+    p.subtitle Modern CSS framework based on
+        a(href='https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Basic_Concepts_of_Flexbox')  Flexbox
+    div.field
+        div.control
+            input.input(type='text' placeholder='Input')
+
+    div.field
+        div.control
+            span.select
+                select
+                    option(selected) Select Dropdown
+                    option Option One
+                    option Option Two
+                    option Option Three
+                    option Option Four
+
+    div.buttons
+        a.button.is-primary Primary
+        a.button.is-link Link
