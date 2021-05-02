@@ -1,5 +1,14 @@
-const route =  (req, res, next) => {
-    res.send('This product')
-};
+const router = require('express').Router();
 
-module.exports = route;
+router.get('/', (req, res, next) => {
+    pageOption = {
+        title: 'Product'
+    }
+    res.render('product',pageOption)
+});
+
+router.post('/', (req, res, next) => {
+    res.sendStatus(403)
+});
+
+module.exports = router;

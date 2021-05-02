@@ -1,11 +1,19 @@
 const router = require('express').Router();
+const ProductController = require('../controller/ProductController')
+const ErrorController = require('../controller/ErrorController')
 
 router.get('/', (req, res, next) => {
-    res.render('home',{ title: 'Express-Playground', message: 'Bulma'})
+    let pageTitle = 'Express-Playground'
+
+    ProductController.getAllProducts()
+        .then(products => {
+            res.render('home', {
+                pageTitle,
+                products
+            })
+        })
 });
 
-router.post('/', (req, res, next) => {
-    res.sendStatus(403)
-});
+router.post('/', ErrorController.sendNotAllowed);
 
 module.exports = router;

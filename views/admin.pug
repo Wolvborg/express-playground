@@ -1,5 +1,7 @@
 extends main-layout
 block content
+    div.add-item.buttons
+        a.button.is-primary(href='/admin/add-product') Add Item
     if products.length > 0
         div.products-list.columns
             each product in products
@@ -13,12 +15,14 @@ block content
                             div.product__description.has-text-centered
                                 span=product.description
                             div.product__price.has-text-centered
-                                span='Rs. ' + product.price
+                                span=product.price
                         div.product__action.buttons.is-centered
-                            a.button.is-primary.is-small(href='') Add To Cart
-                            a.button.is-link.is-small(href='') View Details
+                            a.button.is-link.is-small(href=`/admin/edit-product/${product.id}`) Edit Item
+                            form(action=`/admin/delete` method='POST')
+                                input(type="hidden" name="id" value=`${product.id}`)
+                                button.button.is-danger.is-small(type='submit') Delete Item
+
 
     else
         div.is-size-1.has-text-centered.has-text-weight-bold
             span No Products
-

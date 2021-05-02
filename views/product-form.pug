@@ -1,0 +1,26 @@
+extends main-layout
+block content
+    div.box
+        div.box__inner
+            if(mode === 'EDIT')
+                - var message = 'Edit Product'
+                -var action = '/admin/edit-product'
+            else
+                - var message = 'Add Product'
+                -var action = '/admin/add-product'
+            h1.is-size-3=message
+            form(method='POST' action=action)
+                div.field
+                    div.control
+                        input.input.is-info( type="text" placeholder="Product Title" name="title" value=product.title)
+                div.field
+                    div.control
+                        input.input.is-info( type="text" placeholder="Product Image" name="image" value=product.image)
+                div.field
+                    div.control
+                        input.input.is-info( type="text" placeholder="Product Price" name="price" value=product.price)
+                div.field
+                    div.control
+                        textarea.textarea.is-info(placeholder="Description" name="description")=product.description
+                input.input( type="hidden" value=product.id name="id")
+                button.button.is-primary(type='submit') Save

@@ -1,5 +1,11 @@
-const route =  (req, res, next) => {
-    res.send('This cart')
-};
+const router = require('express').Router();
 
-module.exports = route;
+router.get('/', (req, res, next) => {
+    res.render('cart',{ title: 'Cart', message: 'Bulma'})
+});
+
+router.post('/', (req, res, next) => {
+    res.sendStatus(403)
+});
+
+module.exports = router;
