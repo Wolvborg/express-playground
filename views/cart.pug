@@ -1,2 +1,25 @@
 extends main-layout
 block content
+    if products.length > 0
+        div.products-list.columns
+            each product in products
+                div.product.column.is-4
+                    div.product-inner.box
+                        figure.product__image.image.is-3by2
+                            img(src=product.image alt=product.title)
+                        div.product__info.content
+                            div.product__title.has-text-centered
+                                span=product.title
+                            div.product__description.has-text-centered
+                                span=product.description
+                            div.product__price.has-text-centered
+                                span='Rs. ' + product.price
+                        div.product__action.buttons.is-centered
+                            form(action='/cart/add' method='POST')
+                                input(type="hidden" name="id" value=`${product.id}`)
+                                button.button.is-primary.is-small(type='submit') Add To Cart
+                            a.button.is-link.is-small(href=`/product/${product.id}`) View Details
+
+    else
+        div.is-size-1.has-text-centered.has-text-weight-bold
+            span Cart is empty

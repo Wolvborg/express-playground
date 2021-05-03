@@ -1,10 +1,10 @@
 const router = require('express').Router();
 
 router.get('/', (req, res, next) => {
-    res.render('cart',{ title: 'Cart', message: 'Bulma'})
+    res.render('cart',{ products:{}})
 });
 
-router.post('/', (req, res, next) => {
+router.post('/add', (req, res, next) => {
     res.sendStatus(403)
 });
 

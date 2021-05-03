@@ -1,19 +1,25 @@
-//const https = require('https');
 const app = require('./app')
-const PORT = process.env.PORT || 3000;
+const PORT = port = normalizePort(process.env.PORT || '3000');
 
+app.set('port', PORT);
 
-
-app.listen(PORT,()=>{
-    console.log('Listening on '+ PORT)
+app.listen(PORT, () => {
+    console.log('Listening on ' + PORT)
 })
 
-function normalizePort(port){
-    if(port){
-        if (!isNaN(port))
-            return port;
-        else return port.toString();
+function normalizePort(val) {
+    var port = parseInt(val, 10);
+
+    if (isNaN(port)) {
+        // named pipe
+        return val;
     }
-    else throw new Error('PORT NUMBER NOT PROVIDED')
+
+    if (port >= 0) {
+        // port number
+        return port;
+    }
+
+    return false;
 }
 

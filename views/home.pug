@@ -15,7 +15,9 @@ block content
                             div.product__price.has-text-centered
                                 span='Rs. ' + product.price
                         div.product__action.buttons.is-centered
-                            a.button.is-primary.is-small(href='') Add To Cart
+                            form(action='/cart/add' method='POST')
+                                input(type="hidden" name="id" value=`${product.id}`)
+                                button.button.is-primary.is-small(type='submit') Add To Cart
                             a.button.is-link.is-small(href=`/product/${product.id}`) View Details
 
     else
