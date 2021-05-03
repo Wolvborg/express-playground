@@ -1,2 +1,14 @@
 extends main-layout
 block content
+    .box
+        .box__inner
+            .box__image
+                figure.image
+                    image(src=product.image alt=product.title)
+            .box__info.content
+                .box__title
+                    span=product.title
+                .box__description
+                    span=product.description
+                .box__price
+                    span=product.price
