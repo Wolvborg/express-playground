@@ -1,11 +1,10 @@
 const router = require('express').Router();
+const CartController = require('../controller/CartController')
 
-router.get('/', (req, res, next) => {
-    res.render('cart',{ products:{}})
-});
+router.get('/', CartController.getCart);
 
-router.post('/add', (req, res, next) => {
-    res.sendStatus(403)
-});
+router.post('/add', CartController.addCart);
+
+router.post('/delete', CartController.deleteCart);
 
 module.exports = router;

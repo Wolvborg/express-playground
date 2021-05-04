@@ -11,7 +11,6 @@ function getAllProducts(req, res, next) {
 }
 
 function getProductByID(req, res, next) {
-
     let productId = req.params.id;
 
     ProductModel.fetchProductById(productId)

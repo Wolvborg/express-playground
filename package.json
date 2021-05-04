@@ -5,7 +5,6 @@
   "main": "server.js",
   "scripts": {
     "dev": "nodemon server.js",
-    "debug": "PORT=2000 node server.js",
     "start": "node server.js",
     "sass-watch": "sass --watch public/scss:public/css",
     "sass": "sass",

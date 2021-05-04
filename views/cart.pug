@@ -1,8 +1,8 @@
 extends main-layout
 block content
-    if products.length > 0
+    if cart.total_items > 0
         div.products-list.columns
-            each product in products
+            each product in cart.products
                 div.product.column.is-4
                     div.product-inner.box
                         figure.product__image.image.is-3by2
@@ -15,9 +15,9 @@ block content
                             div.product__price.has-text-centered
                                 span='Rs. ' + product.price
                         div.product__action.buttons.is-centered
-                            form(action='/cart/add' method='POST')
+                            form(action='/cart/delete' method='POST')
                                 input(type="hidden" name="id" value=`${product.id}`)
-                                button.button.is-primary.is-small(type='submit') Add To Cart
+                                button.button.is-danger.is-small(type='submit') Delete
                             a.button.is-link.is-small(href=`/product/${product.id}`) View Details
 
     else
