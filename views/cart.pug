@@ -1,6 +1,10 @@
 extends main-layout
 block content
     if cart.total_items > 0
+        div.product-qty
+            span='Total Items: ' + cart.total_items
+        div.cart-total
+            span='Total Price: Rs. ' + cart.total_amount
         div.products-list.columns
             each product in cart.products
                 div.product.column.is-4
@@ -13,7 +17,9 @@ block content
                             div.product__description.has-text-centered
                                 span=product.description
                             div.product__price.has-text-centered
-                                span='Rs. ' + product.price
+                                span=product.qty + 'x Rs. ' + product.price
+                            div.product__price-total.has-text-centered
+                                span=`${product.qty * product.price}`
                         div.product__action.buttons.is-centered
                             form(action='/cart/delete' method='POST')
                                 input(type="hidden" name="id" value=`${product.id}`)

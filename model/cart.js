@@ -21,7 +21,7 @@ function getDataFromFile(file, cb) {
     })
 }
 
-function putDataIntoFile(file,data, cb) {
+function putDataIntoFile(file, data, cb) {
     fs.writeFile(file, data, cb)
 }
 
@@ -56,28 +56,29 @@ module.exports = {
                             set(cartObj, 'products[0].qty', 1)
                             set(cartObj, 'total_items', 1)
                             set(cartObj, 'total_amount', product.price)
-                            putDataIntoFile($CART_FILE,JSON.stringify(cartObj), (err) => {
+                            putDataIntoFile($CART_FILE, JSON.stringify(cartObj), (err) => {
                                 if (err) reject(err)
                                 else resolve()
                             })
                         })
                     } else {
                         getDataFromFile($PRODUCT_FILE, product_file_data => {
-                            let existingProductIndex = cartObj.products.findIndex(product=> product.id === productId);
+                            let existingProductIndex = cartObj.products.findIndex(product => product.id === productId);
                             if (existingProductIndex > -1) {
                                 let existingProduct = cartObj.products[existingProductIndex];
-                                set(cartObj, ['products', `${existingProductIndex}`, 'qty'], existingProduct.qty +1)
+                                set(cartObj, `products[${existingProductIndex}].qty`, existingProduct.qty + 1)
                                 set(cartObj, 'total_items', ++cartObj.total_items)
-                                set(cartObj, 'total_amount', existingProductIndex.price * existingProduct.qty)
+                                set(cartObj, 'total_amount', cartObj.total_amount + existingProduct.price)
                             } else {
                                 let products = JSON.parse(product_file_data)
+                                let placeToBeInserted = cartObj.products.length;
                                 let product = products.find(product => product.id === productId);
-                                set(cartObj, ['products', `${cartObj.products.length}`], product)
-                                set(cartObj, ['products', `${cartObj.products.length}`, 'qty'], 1)
-                                set(cartObj, 'total_items', 1)
-                                set(cartObj, 'total_amount', product.price)
+                                set(cartObj, `products[${placeToBeInserted}]`, product)
+                                set(cartObj, `products[${placeToBeInserted}].qty`, 1)
+                                set(cartObj, 'total_items', ++cartObj.total_items)
+                                set(cartObj, 'total_amount', cartObj.total_amount + product.price)
                             }
-                            putDataIntoFile($CART_FILE,JSON.stringify(cartObj), (err) => {
+                            putDataIntoFile($CART_FILE, JSON.stringify(cartObj), (err) => {
                                 if (err) reject(err)
                                 else resolve()
                             })
@@ -89,7 +90,23 @@ module.exports = {
 
     },
 
-    removeFromCart: function (productId) {
-
+    removeFromCart: function (id) {
+        let productId = parseInt(id)
+        return new Promise((resolve, reject) => {
+            getDataFromFile($CART_FILE, cart_file_data => {
+                if (cart_file_data) {
+                    let cartObj = JSON.parse(cart_file_data);
+                    let productToBeDeletedIndex = cartObj.products.findIndex(product => product.id === productId);
+                    let productToBeDeleted = cartObj.products[productToBeDeletedIndex];
+                    cartObj.products.splice(productToBeDeletedIndex, 1)
+                    set(cartObj,'total_items', cartObj.total_items - productToBeDeleted.qty)
+                    set(cartObj,'total_amount', cartObj.total_amount - (productToBeDeleted.qty * productToBeDeleted.price))
+                    putDataIntoFile($CART_FILE, JSON.stringify(cartObj), (err) => {
+                        if (err) reject(err)
+                        else resolve()
+                    })
+                } else reject('No File Present')
+            })
+        })
     },
 }
