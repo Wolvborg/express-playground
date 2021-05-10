@@ -1,8 +1,7 @@
-const ProductModel = require('../model/product')
-
+const ProductModel = require('../model/product-model')
 
 function getAllProducts(req, res, next) {
-    ProductModel.fetchAllProducts()
+    ProductModel.fetchAll()
         .then(products => {
             res.render('admin', {
                 pageTitle: 'Admin Express Playground',
@@ -20,9 +19,10 @@ function getAddProduct(req, res, next) {
 }
 
 function postAddProduct(req, res, next) {
-    let product = req.body
 
-    ProductModel.insertProduct(product)
+    let productModel = new ProductModel(req.body.title, req.body.image, req.body.price, req.body.description)
+
+    productModel.save()
         .then(() => {
             res.redirect('/admin');
         })
@@ -32,10 +32,10 @@ function postAddProduct(req, res, next) {
 function getProductByID(req, res, next) {
 
     let productId = req.params.id
-    ProductModel.fetchProductById(productId)
+    ProductModel.fetchByID(productId)
         .then(product => {
             res.render('product-form', {
-                pageTitle:'Edit Item',
+                pageTitle: 'Edit Item',
                 product,
                 mode: 'EDIT'
             })
@@ -43,9 +43,9 @@ function getProductByID(req, res, next) {
 }
 
 function postEditProduct(req, res, next) {
-    let product = req.body
+    let productModel = new ProductModel(req.body.title, req.body.image, req.body.price, req.body.description, req.body.id)
 
-    ProductModel.editProduct(product)
+    productModel.save()
         .then(() => {
             res.redirect('/admin');
         })
@@ -54,7 +54,7 @@ function postEditProduct(req, res, next) {
 function deleteProduct(req, res, next) {
     let id = req.body.id
 
-    ProductModel.deleteProduct(id)
+    ProductModel.deleteByID(id)
         .then(() => {
             res.redirect('/admin');
         })

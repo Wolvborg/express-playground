@@ -1,4 +1,4 @@
-const CartModel = require('../model/cart')
+const CartModel = require('../model/cart-model')
 
 function getCart(req, res, next) {
     CartModel.fetchCart()

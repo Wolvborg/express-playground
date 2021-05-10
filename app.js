@@ -1,10 +1,10 @@
 const express = require('express');
 const morgan = require('morgan');
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
 
 const app = new express();
 
-app.use(morgan('Accessing :url with :method method. Sent status :status in :response-time ms'));
+app.use(morgan('Accessing :url with :method method. Sent status code :status in :response-time ms'));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 

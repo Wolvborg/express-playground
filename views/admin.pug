@@ -3,7 +3,7 @@ block content
     div.add-item.buttons
         a.button.is-primary(href='/admin/add-product') Add Item
     if products.length > 0
-        div.products-list.columns
+        div.products-list.columns.f-wrap-wrap
             each product in products
                 div.product.column.is-4
                     div.product-inner.box
@@ -17,9 +17,9 @@ block content
                             div.product__price.has-text-centered
                                 span=product.price
                         div.product__action.buttons.is-centered
-                            a.button.is-link.is-small(href=`/admin/edit-product/${product.id}`) Edit Item
+                            a.button.is-link.is-small(href=`/admin/edit-product/${product._id}`) Edit Item
                             form(action=`/admin/delete` method='POST')
-                                input(type="hidden" name="id" value=`${product.id}`)
+                                input(type="hidden" name="id" value=`${product._id}`)
                                 button.button.is-danger.is-small(type='submit') Delete Item
 
 
