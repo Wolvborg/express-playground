@@ -3,8 +3,7 @@ const ProductModel = require('../model/product-model')
 function getAllProducts(req, res, next) {
     ProductModel.fetchAll()
         .then(products => {
-            console.log(products)
-            res.render('home', {
+            res.render('shop/home', {
                 pageTitle: 'Express Playground',
                 products
             })
@@ -17,11 +16,11 @@ function getProductByID(req, res, next) {
     ProductModel.fetchByID(productId)
         .then(product => {
             if (product) {
-                res.render('product', {
+                res.render('shop/product', {
                     product
                 })
             } else {
-                res.render('error', {message: 'Product doesn\'t exist'});
+                res.render('error/error', {message: 'Product doesn\'t exist'});
             }
         })
 }

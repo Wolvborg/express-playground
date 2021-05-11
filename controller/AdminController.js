@@ -3,7 +3,7 @@ const ProductModel = require('../model/product-model')
 function getAllProducts(req, res, next) {
     ProductModel.fetchAll()
         .then(products => {
-            res.render('admin', {
+            res.render('admin/admin', {
                 pageTitle: 'Admin Express Playground',
                 products
             })
@@ -11,7 +11,7 @@ function getAllProducts(req, res, next) {
 }
 
 function getAddProduct(req, res, next) {
-    res.render('product-form', {
+    res.render('admin/product-form', {
         pageTitle: 'Add Item',
         product: {},
         mode: 'ADD'
@@ -34,7 +34,7 @@ function getProductByID(req, res, next) {
     let productId = req.params.id
     ProductModel.fetchByID(productId)
         .then(product => {
-            res.render('product-form', {
+            res.render('admin/product-form', {
                 pageTitle: 'Edit Item',
                 product,
                 mode: 'EDIT'

@@ -2,12 +2,12 @@ const app = require('./app');
 const MongoConnection = require('./database/connection')
 const PORT = port = normalizePort(process.env.PORT || '4000');
 
-MongoConnection.MongoConnect().then(() => {
-    app.listen(PORT, () => {
-        console.log('Listening on ' + PORT);
-    })
-})
-    .catch(err => {
+MongoConnection.MongoConnect()
+    .then(() => {
+        app.listen(PORT, () => {
+            console.log('Listening on ' + PORT);
+        })
+    }).catch(err => {
         console.error(err)
     })
 

@@ -1,12 +1,10 @@
-extends main-layout
+extends ../main-layout
 block content
-    if cart.total_items > 0
-        div.product-qty
-            span='Total Items: ' + cart.total_items
-        div.cart-total
-            span='Total Price: Rs. ' + cart.total_amount
+    div.add-item.buttons
+        a.button.is-primary(href='/admin/add-product') Add Item
+    if products.length > 0
         div.products-list.columns.f-wrap-wrap
-            each product in cart.products
+            each product in products
                 div.product.column.is-4
                     div.product-inner.box
                         figure.product__image.image.is-3by2
@@ -17,15 +15,14 @@ block content
                             div.product__description.has-text-centered
                                 span=product.description
                             div.product__price.has-text-centered
-                                span=product.qty + 'x Rs. ' + product.price
-                            div.product__price-total.has-text-centered
-                                span=`${product.qty * product.price}`
+                                span=product.price
                         div.product__action.buttons.is-centered
-                            form(action='/cart/delete' method='POST')
+                            a.button.is-link.is-small(href=`/admin/edit-product/${product._id}`) Edit Item
+                            form(action=`/admin/delete` method='POST')
                                 input(type="hidden" name="id" value=`${product._id}`)
-                                button.button.is-danger.is-small(type='submit') Delete
-                            a.button.is-link.is-small(href=`/product/${product._id}`) View Details
+                                button.button.is-danger.is-small(type='submit') Delete Item
+
 
     else
         div.is-size-1.has-text-centered.has-text-weight-bold
-            span Cart is empty
+            span No Products
