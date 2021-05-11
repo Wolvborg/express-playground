@@ -5,7 +5,7 @@ $displays: block, inline, inline-block, flex, inline-flex, grid, inline-grid, fl
     display: $display;
   }
 
-  .idisplay-#{$display} {
+  .i-display-#{$display} {
     display: $display !important;
   }
 }
