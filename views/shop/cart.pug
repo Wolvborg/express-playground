@@ -1,11 +1,11 @@
-extends main-layout
+extends ../main-layout
 block content
     if cart.total_items > 0
         div.product-qty
             span='Total Items: ' + cart.total_items
         div.cart-total
             span='Total Price: Rs. ' + cart.total_amount
-        div.products-list.columns
+        div.products-list.columns.f-wrap-wrap
             each product in cart.products
                 div.product.column.is-4
                     div.product-inner.box
@@ -22,9 +22,9 @@ block content
                                 span=`${product.qty * product.price}`
                         div.product__action.buttons.is-centered
                             form(action='/cart/delete' method='POST')
-                                input(type="hidden" name="id" value=`${product.id}`)
+                                input(type="hidden" name="id" value=`${product._id}`)
                                 button.button.is-danger.is-small(type='submit') Delete
-                            a.button.is-link.is-small(href=`/product/${product.id}`) View Details
+                            a.button.is-link.is-small(href=`/product/${product._id}`) View Details
 
     else
         div.is-size-1.has-text-centered.has-text-weight-bold

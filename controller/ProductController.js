@@ -1,27 +1,26 @@
-const ProductModel = require('../model/product')
+const ProductModel = require('../model/product-model')
 
 function getAllProducts(req, res, next) {
-    ProductModel.fetchAllProducts()
+    ProductModel.FETCH_ALL()
         .then(products => {
-        res.render('home', {
-            pageTitle: 'Express Playground',
-            products
+            res.render('shop/home', {
+                pageTitle: 'Express Playground',
+                products
+            })
         })
-    })
 }
 
 function getProductByID(req, res, next) {
     let productId = req.params.id;
 
-    ProductModel.fetchProductById(productId)
+    ProductModel.FETCH_BY_ID(productId)
         .then(product => {
-            if(product){
-                res.render('product', {
+            if (product) {
+                res.render('shop/product', {
                     product
                 })
-            }
-            else{
-                res.render('error',{message:'Product doesn\'t exist'});
+            } else {
+                res.render('error/error', {message: 'Product doesn\'t exist'});
             }
         })
 }
