@@ -19,6 +19,19 @@ const productRoutes = require('./routes/productRoutes'),
     homeRoute = require('./routes/homeRoutes'),
     errorRoute = require('./routes/errorRoute')
 
+app.use((req, res, next) => {
+    UserModel.findById('60b510e7df47cb9448fb0fc3')
+        .then(user =>{
+            req.user = user;
+            next()
+        })
+        .catch(err =>{
+            console.error(err);
+            next();
+        })
+})
+
+
 app.use('/product', productRoutes);
 app.use('/cart', cartRoutes);
 app.use('/admin', adminRoutes);

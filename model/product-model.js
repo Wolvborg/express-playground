@@ -11,15 +11,15 @@ class ProductModel {
         this._id = id ? new mongoDb.ObjectID(id) : null;
     }
 
-    static fetchAll() {
+    static FETCH_ALL() {
         return MongoConnection.getDB('shop').collection('products').find().toArray();
     }
 
-    static fetchByID(prodId) {
+    static FETCH_BY_ID(prodId) {
         return MongoConnection.getDB('shop').collection('products').find({_id: new mongoDb.ObjectID(prodId)}).next();
     }
 
-    static deleteByID(prodId) {
+    static DELETE_BY_ID(prodId) {
         return MongoConnection.getDB('shop').collection('products').deleteOne({_id: new mongoDb.ObjectID(prodId)});
     }
 

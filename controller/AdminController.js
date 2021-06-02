@@ -1,7 +1,7 @@
 const ProductModel = require('../model/product-model')
 
 function getAllProducts(req, res, next) {
-    ProductModel.fetchAll()
+    ProductModel.FETCH_ALL()
         .then(products => {
             res.render('admin/admin', {
                 pageTitle: 'Admin Express Playground',
@@ -32,7 +32,7 @@ function postAddProduct(req, res, next) {
 function getProductByID(req, res, next) {
 
     let productId = req.params.id
-    ProductModel.fetchByID(productId)
+    ProductModel.FETCH_BY_ID(productId)
         .then(product => {
             res.render('admin/product-form', {
                 pageTitle: 'Edit Item',
@@ -54,7 +54,7 @@ function postEditProduct(req, res, next) {
 function deleteProduct(req, res, next) {
     let id = req.body.id
 
-    ProductModel.deleteByID(id)
+    ProductModel.DELETE_BY_ID(id)
         .then(() => {
             res.redirect('/admin');
         })
