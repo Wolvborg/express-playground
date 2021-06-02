@@ -1,14 +1,14 @@
-$flex-direction-values: row , row-reverse , column , column-reverse;
-$flex-wrap-values: nowrap , wrap , wrap-reverse;
+$flex-direction-values: row, row-reverse, column, column-reverse;
+$flex-wrap-values: nowrap, wrap, wrap-reverse;
 
-@each $dir in $flex-direction-values{
-  .f-dir-#{$dir}{
+@each $dir in $flex-direction-values {
+  .f-dir-#{$dir} {
     flex-direction: $dir;
   }
 }
 
-@each $wrap in $flex-wrap-values{
-  .f-wrap-#{$wrap}{
+@each $wrap in $flex-wrap-values {
+  .f-wrap-#{$wrap} {
     flex-wrap: $wrap;
   }
 }

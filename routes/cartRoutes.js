@@ -1,10 +1,10 @@
-const router = require('express').Router();
-const CartController = require('../controller/CartController')
+const router = require("express").Router();
+const CartController = require("../controller/CartController");
 
-router.get('/', CartController.getCart);
+router.get("/", CartController.getCart);
 
-router.post('/add', CartController.addCart);
+router.post("/add", CartController.addCart);
 
-router.post('/delete', CartController.deleteCart);
+router.post("/delete", CartController.deleteCart);
 
 module.exports = router;

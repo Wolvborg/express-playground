@@ -1,4 +1,5 @@
-$displays: block, inline, inline-block, flex, inline-flex, grid, inline-grid, flow-root, none, contents;
+$displays: block, inline, inline-block, flex, inline-flex, grid, inline-grid,
+  flow-root, none, contents;
 
 @each $display in $displays {
   .display-#{$display} {
