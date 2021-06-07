@@ -1,25 +1,25 @@
-const CartModel = require("../model/cart-model");
+const CartModel = require('../model/cart-model');
 
 function getCart(req, res, next) {
-  CartModel.fetchCart().then((cart) => {
-    res.render("shop/cart", { cart });
-  });
+    CartModel.fetchCart().then((cart) => {
+        res.render('shop/cart', { cart });
+    });
 }
 
 function addCart(req, res, next) {
-  let productId = req.body.id;
+    let productId = req.body.id;
 
-  CartModel.addToCart(productId).then(() => {
-    res.redirect("/cart");
-  });
+    CartModel.addToCart(productId).then(() => {
+        res.redirect('/cart');
+    });
 }
 
 function deleteCart(req, res, next) {
-  let productId = req.body.id;
+    let productId = req.body.id;
 
-  CartModel.removeFromCart(productId).then(() => {
-    res.redirect("/cart");
-  });
+    CartModel.removeFromCart(productId).then(() => {
+        res.redirect('/cart');
+    });
 }
 
 exports.getCart = getCart;

@@ -1,29 +1,29 @@
 {
-  "name": "express-app",
-  "version": "1.0.0",
-  "description": "This is an Express App made for fun by Abhishek",
-  "main": "server.js",
-  "scripts": {
-    "dev": "nodemon server.js",
-    "start": "node server.js",
-    "sass-watch": "sass --watch public/scss:public/css",
-    "sass": "sass",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "Abhishek Saini",
-  "license": "ISC",
-  "dependencies": {
-    "body-parser": "^1.19.0",
-    "express": "^4.17.1",
-    "lodash": "^4.17.21",
-    "mongodb": "^3.6.6",
-    "morgan": "^1.10.0",
-    "pug": "^3.0.2"
-  },
-  "devDependencies": {
-    "bulma": "^0.9.2",
-    "nodemon": "^2.0.7",
-    "prettier": "2.3.0"
-  }
+    "name": "express-app",
+    "version": "1.0.0",
+    "description": "This is an Express App made for fun by Abhishek",
+    "main": "server.js",
+    "scripts": {
+        "dev": "nodemon server.js",
+        "start": "node server.js",
+        "sass-watch": "sass --watch public/scss:public/css",
+        "sass": "sass",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "author": "Abhishek Saini",
+    "license": "ISC",
+    "dependencies": {
+        "body-parser": "^1.19.0",
+        "express": "^4.17.1",
+        "lodash": "^4.17.21",
+        "mongodb": "^3.6.6",
+        "morgan": "^1.10.0",
+        "pug": "^3.0.2"
+    },
+    "devDependencies": {
+        "bulma": "^0.9.2",
+        "nodemon": "^2.0.7",
+        "prettier": "2.3.0"
+    }
 }

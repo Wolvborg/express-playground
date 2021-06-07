@@ -1,9 +1,9 @@
-const router = require("express").Router();
-const ProductController = require("../controller/ProductController");
-const ErrorController = require("../controller/ErrorController");
+const router = require('express').Router();
+const ProductController = require('../controller/ProductController');
+const ErrorController = require('../controller/ErrorController');
 
-router.get("/:id", ProductController.getProductByID);
+router.get('/:id', ProductController.getProductByID);
 
-router.post("/", ErrorController.sendNotAllowed);
+router.post('/', ErrorController.sendNotAllowed);
 
 module.exports = router;
