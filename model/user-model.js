@@ -1,3 +1,4 @@
+const { toArray } = require('lodash');
 const mongoDb = require('mongodb');
 const MongoConnection = require('../database/connection');
 
@@ -37,9 +38,7 @@ class UserModel {
 
             return MongoConnection.getDB('shop')
                 .collection('users')
-                .updateOne({ _id: this._id }, { $set: { cart: updatedCart } })
-                .then(console.log)
-                .catch(console.error);
+                .updateOne({ _id: this._id }, { $set: { cart: updatedCart } });
         } else {
             let newCart = [];
 
@@ -47,10 +46,29 @@ class UserModel {
 
             return MongoConnection.getDB('shop')
                 .collection('users')
-                .updateOne({ _id: this._id }, { $set: { cart: newCart } })
-                .then(console.log)
-                .catch(console.error);
+                .updateOne({ _id: this._id }, { $set: { cart: newCart } });
         }
+    }
+
+    fetchCart() {
+        let productsId = this.cart.map((item) => item._id);
+
+        return MongoConnection.getDB('shop')
+            .collection('products')
+            .find({ _id: { $in: productsId } })
+            .toArray()
+            .then((products) => {
+                let total_items = 0;
+                let total_amount = 0;
+                let modifiedProductArray = products.map((product) => {
+                    let qty = this.cart.find((cartP) => cartP._id.toString() === product._id.toString()).qty;
+                    total_items += qty;
+                    total_amount = total_amount + product.price * qty;
+                    return { ...product, qty };
+                });
+
+                return { total_amount, total_items, products: modifiedProductArray };
+            });
     }
 
     static findById(id) {

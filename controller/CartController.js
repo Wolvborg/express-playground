@@ -2,7 +2,7 @@ const CartModel = require('../model/cart-model');
 const UserModel = require('../model/user-model');
 
 function getCart(req, res, next) {
-    CartModel.fetchCart().then((cart) => {
+    req.user.fetchCart().then((cart) => {
         res.render('shop/cart', { cart });
     });
 }
