@@ -14,8 +14,6 @@ MongoConnection.MongoConnect()
 
 function normalizePort(val) {
     var port = parseInt(val, 10);
-    if (s) return a;
-    else b;
 
     if (isNaN(port)) {
         // named pipe

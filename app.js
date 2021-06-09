@@ -1,6 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
+const UserModel = require('./model/user-model');
 
 const app = new express();
 
@@ -21,7 +22,7 @@ const productRoutes = require('./routes/productRoutes'),
 app.use((req, res, next) => {
     UserModel.findById('60b510e7df47cb9448fb0fc3')
         .then((user) => {
-            req.user = user;
+            req.user = new UserModel(user._id, user.username, user.email, user.password, user.cart, user.orders);
             next();
         })
         .catch((err) => {
