@@ -71,6 +71,21 @@ class UserModel {
             });
     }
 
+    removeFromCart(productId) {
+        let _productId = new mongoDb.ObjectID(productId);
+
+        let existingProductIndex = this.cart.findIndex((item) => {
+            return item._id.toString() === _productId.toString();
+        });
+
+        if (existingProductIndex > -1) {
+            let deletedProduct = this.cart.splice(existingProductIndex, 1);
+            return MongoConnection.getDB('shop')
+                .collection('users')
+                .updateOne({ _id: this._id }, { $set: { cart: this.cart } });
+        }
+    }
+
     static findById(id) {
         return MongoConnection.getDB('shop')
             .collection('users')
