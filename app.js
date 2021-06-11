@@ -15,6 +15,7 @@ app.use('/static', express.static('public'));
 
 const productRoutes = require('./routes/productRoutes'),
     cartRoutes = require('./routes/cartRoutes'),
+    orderRoutes = require('./routes/orderRoutes'),
     adminRoutes = require('./routes/adminRoutes'),
     homeRoute = require('./routes/homeRoutes'),
     errorRoute = require('./routes/errorRoute');
@@ -33,6 +34,7 @@ app.use((req, res, next) => {
 
 app.use('/product', productRoutes);
 app.use('/cart', cartRoutes);
+app.use('/checkout', orderRoutes);
 app.use('/admin', adminRoutes);
 app.use(homeRoute);
 app.use(errorRoute);
