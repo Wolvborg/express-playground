@@ -5,7 +5,11 @@ const UserModel = require('./model/user-model');
 
 const app = new express();
 
-app.use(morgan('Accessing :url with :method method. Sent status code :status in :response-time ms'));
+app.use(
+    morgan(
+        'Accessing :url with :method method. Sent status code :status in :response-time ms'
+    )
+);
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
@@ -21,9 +25,9 @@ const productRoutes = require('./routes/productRoutes'),
     errorRoute = require('./routes/errorRoute');
 
 app.use((req, res, next) => {
-    UserModel.findById('60b510e7df47cb9448fb0fc3')
+    UserModel.findById('60c5bc7fb2e6912d304d4aea')
         .then((user) => {
-            req.user = new UserModel(user._id, user.username, user.email, user.password, user.cart, user.orders);
+            req.user = user;
             next();
         })
         .catch((err) => {

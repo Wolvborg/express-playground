@@ -1,7 +1,7 @@
 const ProductModel = require('../model/product-model');
 
 function getAllProducts(req, res, next) {
-    ProductModel.FETCH_ALL().then((products) => {
+    ProductModel.find().then((products) => {
         res.render('shop/home', {
             pageTitle: 'Express Playground',
             products,
@@ -12,7 +12,7 @@ function getAllProducts(req, res, next) {
 function getProductByID(req, res, next) {
     let productId = req.params.id;
 
-    ProductModel.FETCH_BY_ID(productId).then((product) => {
+    ProductModel.findById(productId).then((product) => {
         if (product) {
             res.render('shop/product', {
                 pageTitle: product.title,

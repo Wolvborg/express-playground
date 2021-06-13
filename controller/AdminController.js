@@ -1,7 +1,7 @@
 const ProductModel = require('../model/product-model');
 
 function getAllProducts(req, res, next) {
-    ProductModel.FETCH_ALL().then((products) => {
+    ProductModel.find().then((products) => {
         res.render('admin/admin', {
             pageTitle: 'Admin Express Playground',
             products,
@@ -18,16 +18,25 @@ function getAddProduct(req, res, next) {
 }
 
 function postAddProduct(req, res, next) {
-    let productModel = new ProductModel(req.body.title, req.body.image, req.body.price, req.body.description);
-
-    productModel.save().then(() => {
-        res.redirect('/admin');
+    let productModel = new ProductModel({
+        title: req.body.title,
+        imageUrl: req.body.image,
+        price: req.body.price,
+        description: req.body.description,
+        userId: req.user,
     });
+
+    productModel
+        .save()
+        .then(() => {
+            res.redirect('/admin');
+        })
+        .catch((error) => console.error(error));
 }
 
 function getProductByID(req, res, next) {
     let productId = req.params.id;
-    ProductModel.FETCH_BY_ID(productId).then((product) => {
+    ProductModel.findById(productId).then((product) => {
         res.render('admin/product-form', {
             pageTitle: 'Edit Item',
             product,
@@ -37,23 +46,24 @@ function getProductByID(req, res, next) {
 }
 
 function postEditProduct(req, res, next) {
-    let productModel = new ProductModel(
-        req.body.title,
-        req.body.image,
-        req.body.price,
-        req.body.description,
-        req.body.id
-    );
+    ProductModel.findById(req.body.id)
+        .then((product) => {
+            product.title = req.body.title;
+            product.imageUrl = req.body.image;
+            product.price = req.body.price;
+            product.description = req.body.description;
 
-    productModel.save().then(() => {
-        res.redirect('/admin');
-    });
+            return product.save();
+        })
+        .then(() => {
+            res.redirect('/admin');
+        });
 }
 
 function deleteProduct(req, res, next) {
     let id = req.body.id;
 
-    ProductModel.DELETE_BY_ID(id).then(() => {
+    ProductModel.findByIdAndRemove(id).then(() => {
         res.redirect('/admin');
     });
 }

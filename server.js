@@ -1,9 +1,30 @@
+const mongoose = require('mongoose');
 const app = require('./app');
-const MongoConnection = require('./database/connection');
-const PORT = (port = normalizePort(process.env.PORT || '4000'));
 
-MongoConnection.MongoConnect()
+const UserModel = require('./model/user-model');
+
+const PORT = (port = normalizePort(process.env.PORT || '4000'));
+const URL =
+    'mongodb+srv://wolborg:l1JjP572tsxyofpg@cluster0.uj5eu.mongodb.net/shop_2?retryWrites=true&w=majority';
+
+mongoose
+    .connect(URL, { useUnifiedTopology: true, useNewUrlParser: true })
     .then(() => {
+        console.log('DB Connected');
+
+        UserModel.findOne().then((user) => {
+            if (!user) {
+                const user = new UserModel({
+                    username: 'Wolborg',
+                    email: 'Qwerty',
+                    cart: {
+                        items: [],
+                    },
+                });
+                user.save();
+            }
+        });
+
         app.listen(PORT, () => {
             console.log('Listening on ' + PORT);
         });
