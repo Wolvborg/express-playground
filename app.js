@@ -1,6 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
+const UserModel = require('./model/user-model');
 
 const app = new express();
 
@@ -14,6 +15,7 @@ app.use('/static', express.static('public'));
 
 const productRoutes = require('./routes/productRoutes'),
     cartRoutes = require('./routes/cartRoutes'),
+    orderRoutes = require('./routes/orderRoutes'),
     adminRoutes = require('./routes/adminRoutes'),
     homeRoute = require('./routes/homeRoutes'),
     errorRoute = require('./routes/errorRoute');
@@ -21,7 +23,7 @@ const productRoutes = require('./routes/productRoutes'),
 app.use((req, res, next) => {
     UserModel.findById('60b510e7df47cb9448fb0fc3')
         .then((user) => {
-            req.user = user;
+            req.user = new UserModel(user._id, user.username, user.email, user.password, user.cart, user.orders);
             next();
         })
         .catch((err) => {
@@ -32,6 +34,7 @@ app.use((req, res, next) => {
 
 app.use('/product', productRoutes);
 app.use('/cart', cartRoutes);
+app.use('/checkout', orderRoutes);
 app.use('/admin', adminRoutes);
 app.use(homeRoute);
 app.use(errorRoute);

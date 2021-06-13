@@ -1,7 +1,5 @@
-const CartModel = require('../model/cart-model');
-
 function getCart(req, res, next) {
-    CartModel.fetchCart().then((cart) => {
+    req.user.fetchCart().then((cart) => {
         res.render('shop/cart', { cart });
     });
 }
@@ -9,7 +7,7 @@ function getCart(req, res, next) {
 function addCart(req, res, next) {
     let productId = req.body.id;
 
-    CartModel.addToCart(productId).then(() => {
+    req.user.addToCart(productId).then(() => {
         res.redirect('/cart');
     });
 }
@@ -17,7 +15,7 @@ function addCart(req, res, next) {
 function deleteCart(req, res, next) {
     let productId = req.body.id;
 
-    CartModel.removeFromCart(productId).then(() => {
+    req.user.removeFromCart(productId).then(() => {
         res.redirect('/cart');
     });
 }

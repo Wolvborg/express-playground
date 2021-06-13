@@ -15,6 +15,7 @@ function getProductByID(req, res, next) {
     ProductModel.FETCH_BY_ID(productId).then((product) => {
         if (product) {
             res.render('shop/product', {
+                pageTitle: product.title,
                 product,
             });
         } else {

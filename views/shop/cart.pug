@@ -25,6 +25,9 @@ block content
                                 input(type="hidden" name="id" value=`${product._id}`)
                                 button.button.is-danger.is-small(type='submit') Delete
                             a.button.is-link.is-small(href=`/product/${product._id}`) View Details
+        .cart-actions 
+            form(action='/checkout', method='post')
+                button.button.is-primary(type='submit')='Checkout'
 
     else
         div.is-size-1.has-text-centered.has-text-weight-bold

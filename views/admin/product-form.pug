@@ -4,10 +4,10 @@ block content
         div.box__inner
             if(mode === 'EDIT')
                 - var message = 'Edit Product'
-                -var action = '/admin/edit-product'
+                - var action = '/admin/edit-product'
             else
                 - var message = 'Add Product'
-                -var action = '/admin/add-product'
+                - var action = '/admin/add-product'
             h1.is-size-3=message
             form(method='POST' action=action)
                 div.field
