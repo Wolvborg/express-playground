@@ -1,0 +1,16 @@
+extends ../main-layout
+block content
+    table.table.is-bordered.is-striped.is-fullwidth
+        thead='Previous Orders'
+        tbody 
+            tr
+                td='Order ID'
+                td='Date'
+                td='Total Items'
+                td='Total Amount'
+            each order in orders
+                tr  
+                    td=order._id 
+                    td=order.order.date.toLocaleString()
+                    td=order.order.total_items 
+                    td=order.order.total_amount

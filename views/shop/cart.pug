@@ -26,7 +26,7 @@ block content
                                 button.button.is-danger.is-small(type='submit') Delete
                             a.button.is-link.is-small(href=`/product/${product._id}`) View Details
         .cart-actions 
-            form(action='/checkout', method='post')
+            form(action='/orders', method='post')
                 button.button.is-primary(type='submit')='Checkout'
 
     else

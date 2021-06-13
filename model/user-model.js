@@ -45,6 +45,11 @@ userSchema.methods.addToCart = function (productId) {
     return this.save();
 };
 
+userSchema.methods.clearCart = function (productId) {
+    this.cart = { items: [] };
+    return this.save();
+};
+
 userSchema.methods.removeFromCart = function (productId) {
     let updatedCartItems = this.cart.items.filter((item) => {
         return item.productId.toString() !== productId;
