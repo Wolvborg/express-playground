@@ -2,6 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const UserModel = require('./model/user-model');
+const session = require('express-session');
 
 const app = new express();
 
@@ -12,7 +13,13 @@ app.use(
 );
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-
+app.use(
+    session({
+        secret: 'WOLBORG',
+        resave: false,
+        saveUninitialized: true,
+    })
+);
 app.set('views', './views');
 app.set('view engine', 'pug');
 app.use('/static', express.static('public'));
@@ -22,7 +29,8 @@ const productRoutes = require('./routes/productRoutes'),
     orderRoutes = require('./routes/orderRoutes'),
     adminRoutes = require('./routes/adminRoutes'),
     homeRoute = require('./routes/homeRoutes'),
-    errorRoute = require('./routes/errorRoute');
+    errorRoutes = require('./routes/errorRoutes'),
+    authRoutes = require('./routes/authRoutes');
 
 app.use((req, res, next) => {
     UserModel.findById('60c5bc7fb2e6912d304d4aea')
@@ -40,7 +48,8 @@ app.use('/product', productRoutes);
 app.use('/cart', cartRoutes);
 app.use('/orders', orderRoutes);
 app.use('/admin', adminRoutes);
+app.use('/auth', authRoutes);
 app.use(homeRoute);
-app.use(errorRoute);
+app.use(errorRoutes);
 
 module.exports = app;
