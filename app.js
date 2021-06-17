@@ -17,7 +17,7 @@ app.use(
     session({
         secret: 'WOLBORG',
         resave: false,
-        saveUninitialized: true,
+        saveUninitialized: false,
     })
 );
 app.set('views', './views');

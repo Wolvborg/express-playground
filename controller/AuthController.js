@@ -1,8 +1,9 @@
 exports.getLogin = (req, res, next) => {
-    req.session.isLogged = true;
+    console.log(req.session.isLoggedIn);
     res.render('auth/login');
 };
 
 exports.postLogin = (req, res, next) => {
-    next();
+    req.session.isLoggedIn = true;
+    res.redirect('/admin');
 };

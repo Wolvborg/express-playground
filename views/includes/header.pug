@@ -8,4 +8,10 @@ header#header
             div.navbar-end
                 div.navbar-item
                     div.buttons
-                        a.button.is-primary(href='/auth') Admin Login
+                        if !isLoggedIn
+                            a.button.is-primary(href='/auth') Login
+                        else
+                            form(action="/auth" method='POST') 
+                                button(type="submit").button.is-primary Logout
+                            
+                            

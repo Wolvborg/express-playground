@@ -2,11 +2,10 @@ const OrderModel = require('../model/orders-model');
 
 function getAllOrders(req, res, next) {
     OrderModel.find({ 'user.userId': req.user._id }).then((orders) => {
-        console.log(orders);
-
         res.render('shop/order', {
             pageTitle: 'Orders',
             orders,
+            isLoggedIn: req.session.isLoggedIn,
         });
     });
 }
