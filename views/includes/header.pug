@@ -3,15 +3,16 @@ header#header
         div.navbar-menu
             div.navbar-start
                 a.navbar-item(href='/') Home
-                a.navbar-item(href='/cart') Cart
-                a.navbar-item(href='/orders') Orders
+                if isLoggedIn
+                    a.navbar-item(href='/cart') Cart
+                    a.navbar-item(href='/orders') Orders
             div.navbar-end
                 div.navbar-item
                     div.buttons
                         if !isLoggedIn
                             a.button.is-primary(href='/auth') Login
                         else
-                            form(action="/auth" method='POST') 
+                            form(action="/auth/logout" method='POST') 
                                 button(type="submit").button.is-primary Logout
                             
                             

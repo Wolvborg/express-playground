@@ -3,6 +3,10 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const UserModel = require('./model/user-model');
 const session = require('express-session');
+const SessionStore = require('connect-mongo');
+
+const URL =
+    'mongodb+srv://wolborg:l1JjP572tsxyofpg@cluster0.uj5eu.mongodb.net/shop_2';
 
 const app = new express();
 
@@ -18,6 +22,9 @@ app.use(
         secret: 'WOLBORG',
         resave: false,
         saveUninitialized: false,
+        store: SessionStore.create({
+            mongoUrl: URL,
+        }),
     })
 );
 app.set('views', './views');

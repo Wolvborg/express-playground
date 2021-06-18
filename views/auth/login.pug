@@ -1,6 +1,11 @@
 extends ../main-layout
 block content
-    form.form(action="/auth" method='POST')
-        input#username(type="text", name="username")
-        input#password(type="password", name="password")
-        button(type="submit") Login
+    form.login-form(action="/auth/login" method='POST')
+        div.field
+            label.label= 'Username'
+            input#username.input(type="text", name="username")
+        div.field
+            label.label= 'Password'
+            input#password.input(type="password", name="password")
+        div.field
+            button.button.is-primary(type="submit") Login
