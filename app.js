@@ -40,7 +40,11 @@ const productRoutes = require('./routes/productRoutes'),
     authRoutes = require('./routes/authRoutes');
 
 app.use((req, res, next) => {
-    UserModel.findById('60c5bc7fb2e6912d304d4aea')
+    if (!req.session.user) {
+        return next();
+    }
+
+    UserModel.findById(req.session.user._id)
         .then((user) => {
             req.user = user;
             next();

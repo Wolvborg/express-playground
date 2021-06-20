@@ -4,9 +4,12 @@ exports.getLogin = (req, res, next) => {
 };
 
 exports.postLogin = (req, res, next) => {
-    req.session.isLoggedIn = true;
+    UserModel.findById('60c5bc7fb2e6912d304d4aea').then((user) => {
+        req.session.user = user;
+        req.session.isLoggedIn = true;
 
-    res.redirect('/admin');
+        res.redirect('/admin');
+    });
 };
 
 exports.postLogout = (req, res, next) => {
