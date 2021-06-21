@@ -10,7 +10,8 @@ header#header
                 div.navbar-item
                     div.buttons
                         if !isLoggedIn
-                            a.button.is-primary(href='/auth') Login
+                            a.button.is-primary(href='/auth/login') Login
+                            a.button.is-primary(href='/auth/register') Register
                         else
                             form(action="/auth/logout" method='POST') 
                                 button(type="submit").button.is-primary Logout

@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const UserModel = require('./model/user-model');
 const session = require('express-session');
 const SessionStore = require('connect-mongo');
+const CrfProtection = require('csurf')();
 
 const URL =
     'mongodb+srv://wolborg:l1JjP572tsxyofpg@cluster0.uj5eu.mongodb.net/shop_2';
@@ -27,6 +28,8 @@ app.use(
         }),
     })
 );
+app.use(CrfProtection);
+
 app.set('views', './views');
 app.set('view engine', 'pug');
 app.use('/static', express.static('public'));

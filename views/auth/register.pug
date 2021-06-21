@@ -1,0 +1,14 @@
+extends ../main-layout
+block content
+    form.login-form(action="/auth/register" method='POST')
+        div.field
+            label.label= 'Username'
+            input#username.input(type="text", name="username")
+        div.field
+            label.label= 'Password'
+            input#password.input(type="password", name="password")
+        div.field
+            label.label= 'Confirm Password'
+            input#password.input(type="password", name="cpassword")
+        div.field
+            button.button.is-primary(type="submit") Register

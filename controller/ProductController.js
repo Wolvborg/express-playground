@@ -1,7 +1,6 @@
 const ProductModel = require('../model/product-model');
 
 function getAllProducts(req, res, next) {
-    console.log(req.session.isLoggedIn);
     ProductModel.find().then((products) => {
         res.render('shop/home', {
             pageTitle: 'Express Playground',

@@ -1,10 +1,11 @@
 const router = require('express').Router();
 const CartController = require('../controller/CartController');
+const IsAuth = require('../middleware/is-auth');
 
-router.get('/', CartController.getCart);
+router.get('/', IsAuth, CartController.getCart);
 
-router.post('/add', CartController.addCart);
+router.post('/add', IsAuth, CartController.addCart);
 
-router.post('/delete', CartController.deleteCart);
+router.post('/delete', IsAuth, CartController.deleteCart);
 
 module.exports = router;
