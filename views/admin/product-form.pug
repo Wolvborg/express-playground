@@ -10,6 +10,7 @@ block content
                 - var action = '/admin/add-product'
             h1.is-size-3=message
             form(method='POST' action=action)
+                input.input(type="hidden", name="_csrf" value=csrfToken)
                 div.field
                     div.control
                         input.input.is-info( type="text" placeholder="Product Title" name="title" value=product.title)

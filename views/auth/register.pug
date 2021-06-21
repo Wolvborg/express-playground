@@ -1,6 +1,7 @@
 extends ../main-layout
 block content
     form.login-form(action="/auth/register" method='POST')
+        input.input(type="hidden", name="_csrf" value=csrfToken)
         div.field
             label.label= 'Username'
             input#username.input(type="text", name="username")

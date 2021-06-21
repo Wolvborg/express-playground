@@ -20,6 +20,7 @@ block content
                             a.button.is-link.is-small(href=`/admin/edit-product/${product._id}`) Edit Item
                             form(action=`/admin/delete` method='POST')
                                 input(type="hidden" name="id" value=`${product._id}`)
+                                input.input(type="hidden", name="_csrf" value=csrfToken)
                                 button.button.is-danger.is-small(type='submit') Delete Item
 
 

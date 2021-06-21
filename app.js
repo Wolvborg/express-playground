@@ -1,10 +1,11 @@
 const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
-const UserModel = require('./model/user-model');
 const session = require('express-session');
 const SessionStore = require('connect-mongo');
 const CrfProtection = require('csurf')();
+const SetLocals = require('./middleware/set-locals');
+const UserModel = require('./model/user-model');
 
 const URL =
     'mongodb+srv://wolborg:l1JjP572tsxyofpg@cluster0.uj5eu.mongodb.net/shop_2';
@@ -29,6 +30,7 @@ app.use(
     })
 );
 app.use(CrfProtection);
+app.use(SetLocals);
 
 app.set('views', './views');
 app.set('view engine', 'pug');
