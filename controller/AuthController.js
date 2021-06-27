@@ -1,14 +1,57 @@
+const bcrypt = require('bcryptjs');
+const UserModel = require('../model/user-model');
+
 exports.getLogin = (req, res, next) => {
-    console.log(req.session.isLoggedIn);
     res.render('auth/login');
 };
 
-exports.postLogin = (req, res, next) => {
-    UserModel.findById('60c5bc7fb2e6912d304d4aea').then((user) => {
-        req.session.user = user;
-        req.session.isLoggedIn = true;
+exports.getRegister = (req, res, next) => {
+    res.render('auth/register');
+};
 
-        res.redirect('/admin');
+exports.postLogin = (req, res, next) => {
+    let { username, password } = req.body;
+
+    UserModel.findOne({ username: username }).then((user) => {
+        if (!user) {
+            res.redirect('/auth/register');
+        } else {
+            bcrypt.compare(password, user.password).then((doMatch) => {
+                if (doMatch) {
+                    req.session.user = user;
+                    req.session.isLoggedIn = true;
+                    res.redirect('/');
+                } else {
+                    res.redirect('/auth/login');
+                }
+            });
+        }
+    });
+};
+
+exports.postRegister = (req, res, next) => {
+    let { username, password } = req.body;
+
+    UserModel.findOne({ username: username }).then((user) => {
+        if (user) {
+            res.redirect('/auth/login');
+        } else {
+            bcrypt.genSalt(10, function (err, salt) {
+                bcrypt.hash(password, salt, function (err, hashPassword) {
+                    // Store hash in your password DB.
+
+                    if (!err) {
+                        new UserModel({
+                            username,
+                            password: hashPassword,
+                            cart: { items: [] },
+                        }).save();
+
+                        res.redirect('/auth/login');
+                    }
+                });
+            });
+        }
     });
 };
 

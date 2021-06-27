@@ -22,11 +22,13 @@ block content
                                 span=`${product.qty * product.price}`
                         div.product__action.buttons.is-centered
                             form(action='/cart/delete' method='POST')
+                                input.input(type="hidden", name="_csrf" value=csrfToken)
                                 input(type="hidden" name="id" value=`${product.productId}`)
                                 button.button.is-danger.is-small(type='submit') Delete
                             a.button.is-link.is-small(href=`/product/${product._id}`) View Details
         .cart-actions 
             form(action='/orders', method='post')
+                input.input(type="hidden", name="_csrf" value=csrfToken)
                 button.button.is-primary(type='submit')='Checkout'
 
     else

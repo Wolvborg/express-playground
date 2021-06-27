@@ -24,7 +24,6 @@ function getCart(req, res, next) {
                     total_items,
                     products: modifiedProductArray,
                 },
-                isLoggedIn: req.session.isLoggedIn,
             });
         });
 }

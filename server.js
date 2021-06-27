@@ -12,19 +12,6 @@ mongoose
     .then(() => {
         console.log('DB Connected');
 
-        UserModel.findOne().then((user) => {
-            if (!user) {
-                const user = new UserModel({
-                    username: 'Wolborg',
-                    email: 'Qwerty',
-                    cart: {
-                        items: [],
-                    },
-                });
-                user.save();
-            }
-        });
-
         app.listen(PORT, () => {
             console.log('Listening on ' + PORT);
         });

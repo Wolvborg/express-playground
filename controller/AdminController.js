@@ -5,7 +5,6 @@ function getAllProducts(req, res, next) {
         res.render('admin/admin', {
             pageTitle: 'Admin Express Playground',
             products,
-            isLoggedIn: req.session.isLoggedIn,
         });
     });
 }
@@ -15,7 +14,6 @@ function getAddProduct(req, res, next) {
         pageTitle: 'Add Item',
         product: {},
         mode: 'ADD',
-        isLoggedIn: req.session.isLoggedIn,
     });
 }
 
@@ -43,7 +41,6 @@ function getProductByID(req, res, next) {
             pageTitle: 'Edit Item',
             product,
             mode: 'EDIT',
-            isLoggedIn: req.session.isLoggedIn,
         });
     });
 }

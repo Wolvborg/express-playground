@@ -1,6 +1,6 @@
 extends ../main-layout
 block content
-    form.login-form(action="/auth/login" method='POST')
+    form.login-form(action="/auth/register" method='POST')
         input.input(type="hidden", name="_csrf" value=csrfToken)
         div.field
             label.label= 'Username'
@@ -9,4 +9,7 @@ block content
             label.label= 'Password'
             input#password.input(type="password", name="password")
         div.field
-            button.button.is-primary(type="submit") Login
+            label.label= 'Confirm Password'
+            input#password.input(type="password", name="cpassword")
+        div.field
+            button.button.is-primary(type="submit") Register

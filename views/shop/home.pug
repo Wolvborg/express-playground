@@ -16,6 +16,7 @@ block content
                                 span='Rs. ' + product.price
                         div.product__action.buttons.is-centered
                             form(action='/cart/add' method='POST')
+                                input.input(type="hidden", name="_csrf" value=csrfToken)
                                 input(type="hidden" name="id" value=`${product._id}`)
                                 button.button.is-primary.is-small(type='submit') Add To Cart
                             a.button.is-link.is-small(href=`/product/${product._id}`) View Details

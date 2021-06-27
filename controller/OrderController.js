@@ -5,7 +5,6 @@ function getAllOrders(req, res, next) {
         res.render('shop/order', {
             pageTitle: 'Orders',
             orders,
-            isLoggedIn: req.session.isLoggedIn,
         });
     });
 }
