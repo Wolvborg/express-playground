@@ -4,7 +4,7 @@ const app = require('./app');
 const UserModel = require('./model/user-model');
 
 const PORT = (port = normalizePort(process.env.PORT || '4000'));
-const URL = 'mongodb://localhost:27017/';
+const URL = 'mongodb://localhost:27017/myDatabase';
 
 mongoose
     .connect(URL, { useUnifiedTopology: true, useNewUrlParser: true })

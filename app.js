@@ -7,7 +7,7 @@ const CrfProtection = require('csurf')();
 const SetLocals = require('./middleware/set-locals');
 const UserModel = require('./model/user-model');
 
-const URL = 'mongodb://localhost:27017/';
+const URL = 'mongodb://localhost:27017/myDatabase';
 
 const app = new express();
 
