@@ -5,9 +5,11 @@ block content
             if(mode === 'EDIT')
                 - var message = 'Edit Product'
                 - var action = '/admin/edit-product'
+                - var file_location = product.image
             else
                 - var message = 'Add Product'
                 - var action = '/admin/add-product'
+                - var file_location = 'Nothing Selected'
             h1.is-size-3=message
             form(method='POST' action=action)
                 input.input(type="hidden", name="_csrf" value=csrfToken)

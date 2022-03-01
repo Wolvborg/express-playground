@@ -7,16 +7,11 @@ const CrfProtection = require('csurf')();
 const SetLocals = require('./middleware/set-locals');
 const UserModel = require('./model/user-model');
 
-const URL =
-    'mongodb+srv://wolborg:l1JjP572tsxyofpg@cluster0.uj5eu.mongodb.net/shop_2';
+const URL = 'mongodb://localhost:27017/';
 
 const app = new express();
 
-app.use(
-    morgan(
-        'Accessing :url with :method method. Sent status code :status in :response-time ms'
-    )
-);
+app.use(morgan('Accessing :url with :method method. Sent status code :status in :response-time ms'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(

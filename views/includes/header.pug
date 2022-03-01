@@ -13,6 +13,7 @@ header#header
                             a.button.is-primary(href='/auth/login') Login
                             a.button.is-primary(href='/auth/register') Register
                         else
+                            a.button.is-primary(href='/admin') Admin
                             form(action="/auth/logout" method='POST') 
                                 input.input(type="hidden", name="_csrf" value=csrfToken)
                                 button(type="submit").button.is-primary Logout

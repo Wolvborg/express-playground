@@ -4,8 +4,7 @@ const app = require('./app');
 const UserModel = require('./model/user-model');
 
 const PORT = (port = normalizePort(process.env.PORT || '4000'));
-const URL =
-    'mongodb+srv://wolborg:l1JjP572tsxyofpg@cluster0.uj5eu.mongodb.net/shop_2?retryWrites=true&w=majority';
+const URL = 'mongodb://localhost:27017/';
 
 mongoose
     .connect(URL, { useUnifiedTopology: true, useNewUrlParser: true })
@@ -14,6 +13,7 @@ mongoose
 
         app.listen(PORT, () => {
             console.log('Listening on ' + PORT);
+            console.log(`CLick on http://localhost:${PORT}/`);
         });
     })
     .catch((err) => {
